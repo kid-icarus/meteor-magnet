@@ -1,0 +1,24 @@
+/* CSS declarations go here */
+.word {
+  padding: 20px;
+  display: inline-block;
+  border: 2px solid #000;
+  font-size: 40px;
+  background-color: #fff;
+}
+
+.delete {
+  font-size: 20px;
+  cursor: pointer;
+  color: #ee0000;
+}
+
+#words {
+  height: 50px;
+  font-size: 40px;
+  width: 200px;
+}
+
+body {
+  background-color: #eee;
+}

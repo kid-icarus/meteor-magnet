@@ -1,0 +1,15 @@
+<head>
+  <title>Magnet Words</title>
+</head>
+
+<body>
+  {{> hello}}
+</body>
+
+<template name="hello">
+  <h2>Magnet Words</h2>
+  <input type="text" id="words" />
+  {{#each words}}
+  <div class="word" id={{_id}}>{{name}}<a class='delete'>x</a></div>
+  {{/each}}
+</template>
