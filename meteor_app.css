@@ -5,11 +5,11 @@
   border: 2px solid #000;
   font-size: 40px;
   background-color: #fff;
+  cursor: pointer;
 }
 
 .delete {
   font-size: 20px;
-  cursor: pointer;
   color: #ee0000;
 }
 

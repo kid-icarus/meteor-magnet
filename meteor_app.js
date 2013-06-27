@@ -9,7 +9,6 @@ if (Meteor.isClient) {
   Template.hello.words = function () {
     return Words.find();
   };
-  $('.word').draggable();
 
   Template.hello.events({
     'click .delete' : function () {
@@ -21,7 +20,6 @@ if (Meteor.isClient) {
     'mouseover .word': function() {
       $('#' + this._id).draggable();
       console.log(this._id);
-      // $(this._id).draggable();
     },
 
     'keyup #words' : function(event) {
