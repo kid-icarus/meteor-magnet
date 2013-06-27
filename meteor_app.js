@@ -27,7 +27,7 @@ if (Meteor.isClient) {
             'y' : 0
           };
           Words.insert(insertWord);
-          $('#words').val = '';
+          $('#words').val('');
         }
     }
   });
