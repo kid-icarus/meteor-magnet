@@ -14,16 +14,12 @@ if (Meteor.isClient) {
     'click .delete' : function () {
       // template data, if any, is available in 'this'
       Words.remove(this._id);
-      if (typeof console !== 'undefined')
-        console.log("You pressed the button");
     },
     'mouseover .word': function() {
       $('#' + this._id).draggable();
-      console.log(this._id);
     },
 
     'keyup #words' : function(event) {
-        console.log(event); 
         if (event.keyCode == 13) {
           insertWord = {
             'name': $('#words').val(),
@@ -31,7 +27,6 @@ if (Meteor.isClient) {
             'y' : 0
           };
           Words.insert(insertWord);
-          console.log("You changed words the button");
 
         }
     }
