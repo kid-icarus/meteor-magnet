@@ -1,22 +1,31 @@
 /* CSS declarations go here */
 .word {
-  padding: 20px;
-  display: inline-block;
-  border: 2px solid #000;
-  font-size: 40px;
   background-color: #fff;
+  border: 2px solid #000;
   cursor: pointer;
+  display: inline-block;
+  font-size: 40px;
+  padding: 15px;
+  position: relative;
 }
 
 .delete {
   font-size: 20px;
   color: #ee0000;
+  font-family: Helvetica;
+  position: absolute;
+  top: 0;
+  right: 5px;
 }
 
 #words {
   height: 50px;
   font-size: 40px;
   width: 200px;
+}
+
+.ui-helper-hidden-accessible {
+  display: none;
 }
 
 body {
