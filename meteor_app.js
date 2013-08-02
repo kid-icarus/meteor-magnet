@@ -17,20 +17,51 @@ if (Meteor.isClient) {
     },
     'mouseover .word': function() {
       $('#' + this._id).draggable();
-    },
-
-    'keyup #words' : function(event) {
-        if (event.keyCode == 13) {
-          insertWord = {
-            'name': $('#words').val(),
-            'x' : 0,
-            'y' : 0
-          };
-          Words.insert(insertWord);
-          $('#words').val('');
-        }
     }
   });
+  
+  Meteor.startup(function() {
+
+    $('#words').autocomplete({
+      delay: 500,
+      select: function(event, ui) {
+
+        var insertWord = {
+          'name': ui.item.value,
+          'x' : 0,
+          'y' : 0
+        };
+
+        Words.insert(insertWord);
+
+        $('#words').val('');
+
+        return false;
+
+      },
+      source: function(request, response) {
+          $.ajax({
+            url: 'http://www.linkedin.com/ta/skill',
+            dataType: 'jsonp',
+            data: {
+              query: request.term
+            },
+            success: function( data ) {
+  
+              response( $.map( data.resultList, function( item ) {
+                return {
+                  label: item.headline,
+                  value: item.displayName
+                }
+              }));
+
+            }
+          });
+        },
+    });
+
+  });
+  
 }
 
 if (Meteor.isServer) {
