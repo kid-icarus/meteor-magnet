@@ -6,7 +6,7 @@
   display: inline-block;
   font-size: 40px;
   padding: 15px;
-  position: relative;
+  position: absolute;
 }
 
 .delete {
@@ -31,3 +31,4 @@
 body {
   background-color: #eee;
 }
+
