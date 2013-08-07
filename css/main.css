@@ -1,38 +1,51 @@
 /* CSS declarations go here */
 /* line 4, ../style/sass/main.scss */
 .word {
-  background-color: #fff;
-  border: 2px solid #000;
+  background-color: #ffffff;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(20%, #ffffff), color-stop(80%, #fff9f9), color-stop(100%, #ffffff));
+  background: -webkit-linear-gradient(#ffffff 20%, #fff9f9 80%, #ffffff 100%);
+  background: -moz-linear-gradient(#ffffff 20%, #fff9f9 80%, #ffffff 100%);
+  background: -o-linear-gradient(#ffffff 20%, #fff9f9 80%, #ffffff 100%);
+  background: linear-gradient(#ffffff 20%, #fff9f9 80%, #ffffff 100%);
+  border: 2px solid;
+  border-color: #666 #333 #333 #666;
   cursor: pointer;
   display: inline-block;
   font-size: 40px;
   padding: 15px;
   position: absolute;
   white-space: nowrap;
-  -webkit-transition-property: box-shadow, margin;
-  -moz-transition-property: box-shadow, margin;
-  -o-transition-property: box-shadow, margin;
-  transition-property: box-shadow, margin;
-  -webkit-transition-duration: 0.15s, 0.15s;
-  -moz-transition-duration: 0.15s, 0.15s;
-  -o-transition-duration: 0.15s, 0.15s;
-  transition-duration: 0.15s, 0.15s;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
-  box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
+  border-radius: 3px;
+  -webkit-transition-property: box-shadow, margin, -webkit-transform;
+  -moz-transition-property: box-shadow, margin, -moz-transform;
+  -o-transition-property: box-shadow, margin, -o-transform;
+  transition-property: box-shadow, margin, transform;
+  -webkit-transition-duration: 0.15s, 0.15s, 0.15s;
+  -moz-transition-duration: 0.15s, 0.15s, 0.15s;
+  -o-transition-duration: 0.15s, 0.15s, 0.15s;
+  transition-duration: 0.15s, 0.15s, 0.15s;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px, white 0 0 4px 0 inset;
+  -moz-box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px, white 0 0 4px 0 inset;
+  box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px, white 0 0 4px 0 inset;
 }
-/* line 21, ../style/sass/main.scss */
-.word.ui-draggable-dragging {
-  margin-top: -10px;
-  margin-left: -10px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 8px 8px 4px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.2) 8px 8px 4px;
-  box-shadow: rgba(0, 0, 0, 0.2) 8px 8px 4px;
+/* line 28, ../style/sass/main.scss */
+.word.ui-draggable-dragging, .word:active {
+  margin-top: -2px;
+  margin-left: -2px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 12px 12px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.2) 12px 12px 4px;
+  box-shadow: rgba(0, 0, 0, 0.2) 12px 12px 4px;
   z-index: 1;
+  -webkit-transform: rotate(-5deg);
+  -moz-transform: rotate(-5deg);
+  -ms-transform: rotate(-5deg);
+  -o-transform: rotate(-5deg);
+  transform: rotate(-5deg);
 }
 
-/* line 29, ../style/sass/main.scss */
-.delete {
+/* line 38, ../style/sass/main.scss */
+.word-delete {
+  display: none;
   font-size: 20px;
   color: #ee0000;
   font-family: Helvetica;
@@ -40,20 +53,24 @@
   top: 0;
   right: 5px;
 }
+/* line 47, ../style/sass/main.scss */
+.word:hover .word-delete {
+  display: block;
+}
 
-/* line 38, ../style/sass/main.scss */
+/* line 52, ../style/sass/main.scss */
 #words {
   height: 50px;
   font-size: 40px;
   width: 200px;
 }
 
-/* line 44, ../style/sass/main.scss */
+/* line 58, ../style/sass/main.scss */
 .ui-helper-hidden-accessible {
   display: none;
 }
 
-/* line 48, ../style/sass/main.scss */
+/* line 62, ../style/sass/main.scss */
 body {
-  background-color: #eee;
+  background-color: #fef0e0;
 }
