@@ -77,3 +77,15 @@
 body {
   background-color: #fef0e0;
 }
+
+#users {
+  position: fixed;
+  right: 5px;
+  top: 5px;
+}
+.participant {
+  width: 50px;
+  float: left;
+  height: 50px;
+  margin: 10px;
+}

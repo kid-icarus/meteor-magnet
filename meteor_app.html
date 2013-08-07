@@ -19,5 +19,11 @@
     {{#each words}}
     <div class="word" style="left: {{x}}px; top: {{y}}px;" id={{_id}}>{{name}}<a class='word-delete'>x</a></div>
     {{/each}}
+
+    <div id="users">
+    {{#each users}}
+      <div class="participant" style="background-color: {{color}}"><span>A User</span></div>
+    {{/each}}
+    </div>
   </div>
 </template>

@@ -1,4 +1,5 @@
 Words = new Meteor.Collection("words");
+Users = new Meteor.Collection("users");
 
 if (Meteor.isClient) {
 
@@ -8,6 +9,9 @@ if (Meteor.isClient) {
 
   Template.hello.words = function () {
     return Words.find();
+  };
+  Template.hello.users = function () {
+    return Users.find();
   };
 
   Template.hello.events({
@@ -85,6 +89,36 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
+  Users.remove({});
+    Meteor.default_server.stream_server.register( Meteor.bindEnvironment( function(socket) {
+        var intervalID = Meteor.setInterval(function() {
+            if (socket.meteor_session) {
+
+                var connection = {
+                    connectionID: socket.meteor_session.id,
+                    connectionAddress: socket.address,
+                    userID: socket.meteor_session.userId,
+                    color: '#'+Math.floor(Math.random()*16777215).toString(16)
+                };
+
+                socket.id = socket.meteor_session.id;
+
+                Users.insert(connection); 
+
+                Meteor.clearInterval(intervalID);
+            }
+        }, 1000);
+
+        socket.on('close', Meteor.bindEnvironment(function () {
+            Users.remove({
+                connectionID: socket.id
+                });
+        }, function(e) {
+            Meteor._debug("Exception from connection close callback:", e);
+        }));
+    }, function(e) {
+        Meteor._debug("Exception from connection registration callback:", e);
+    }));
     // code to run on server at startup
   });
 }
