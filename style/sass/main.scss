@@ -9,6 +9,21 @@
   font-size: 40px;
   padding: 15px;
   position: absolute;
+  white-space: nowrap;
+
+  @include transition-property(box-shadow, margin);
+  @include transition-duration(.15s, .15s);
+
+  @include box-shadow(
+    rgba(black, .4) 1px 1px 1px
+  );
+
+  &.ui-draggable-dragging {
+    margin-top: -10px;
+    margin-left: -10px;
+    @include box-shadow(rgba(black, .2) 8px 8px 4px);
+    z-index: 1;
+  }
 }
 
 .delete {
