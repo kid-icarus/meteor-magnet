@@ -17,6 +17,9 @@ if (Meteor.isClient) {
     },
     'mouseover .word': function() {
       $('#' + this._id).draggable();
+    },
+    'click #up': function() {
+       
     }
   });
   
