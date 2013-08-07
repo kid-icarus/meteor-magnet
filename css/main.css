@@ -11,7 +11,7 @@
   border-color: #666 #333 #333 #666;
   cursor: pointer;
   display: inline-block;
-  font-size: 40px;
+  font-size: 32px;
   padding: 15px;
   position: absolute;
   white-space: nowrap;
@@ -24,26 +24,29 @@
   -moz-transition-duration: 0.15s, 0.15s, 0.15s;
   -o-transition-duration: 0.15s, 0.15s, 0.15s;
   transition-duration: 0.15s, 0.15s, 0.15s;
+  -webkit-transform-origin: 0 25% 0 50%;
+  -moz-transform-origin: 0 25% 0 50%;
+  -ms-transform-origin: 0 25% 0 50%;
+  -o-transform-origin: 0 25% 0 50%;
+  transform-origin: 0 25% 0 50%;
   -webkit-box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px, white 0 0 4px 0 inset;
   -moz-box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px, white 0 0 4px 0 inset;
   box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px, white 0 0 4px 0 inset;
 }
-/* line 28, ../style/sass/main.scss */
+/* line 29, ../style/sass/main.scss */
 .word.ui-draggable-dragging, .word:active {
-  margin-top: -2px;
-  margin-left: -2px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 12px 12px 4px;
   -moz-box-shadow: rgba(0, 0, 0, 0.2) 12px 12px 4px;
   box-shadow: rgba(0, 0, 0, 0.2) 12px 12px 4px;
   z-index: 1;
-  -webkit-transform: rotate(-5deg);
-  -moz-transform: rotate(-5deg);
-  -ms-transform: rotate(-5deg);
-  -o-transform: rotate(-5deg);
-  transform: rotate(-5deg);
+  -webkit-transform: rotate(1deg);
+  -moz-transform: rotate(1deg);
+  -ms-transform: rotate(1deg);
+  -o-transform: rotate(1deg);
+  transform: rotate(1deg);
 }
 
-/* line 38, ../style/sass/main.scss */
+/* line 37, ../style/sass/main.scss */
 .word-delete {
   display: none;
   font-size: 20px;
@@ -53,24 +56,24 @@
   top: 0;
   right: 5px;
 }
-/* line 47, ../style/sass/main.scss */
+/* line 46, ../style/sass/main.scss */
 .word:hover .word-delete {
   display: block;
 }
 
-/* line 52, ../style/sass/main.scss */
+/* line 51, ../style/sass/main.scss */
 #words {
   height: 50px;
   font-size: 40px;
   width: 200px;
 }
 
-/* line 58, ../style/sass/main.scss */
+/* line 57, ../style/sass/main.scss */
 .ui-helper-hidden-accessible {
   display: none;
 }
 
-/* line 62, ../style/sass/main.scss */
+/* line 61, ../style/sass/main.scss */
 body {
   background-color: #fef0e0;
 }
