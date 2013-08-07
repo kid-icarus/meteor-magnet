@@ -7,9 +7,17 @@
 </body>
 
 <template name="hello">
-  <h2>Magnet Words</h2>
-  <input type="text" id="words" />
-  {{#each words}}
-  <div class="word" style="left: {{x}}px; top: {{y}}px;" id={{_id}}>{{name}}<a class='delete'>x</a></div>
-  {{/each}}
+  <div id="controls">
+    <h2>Magnet Words</h2>
+    <input type="text" id="words" />
+    <a id="up">↑</a>
+    <a id="down">↓</a>
+    <a id="left">←</a>
+    <a id="right">→</a>
+  </div>
+  <div id="canvas">
+    {{#each words}}
+    <div class="word" style="left: {{x}}px; top: {{y}}px;" id={{_id}}>{{name}}<a class='delete'>x</a></div>
+    {{/each}}
+  </div>
 </template>
