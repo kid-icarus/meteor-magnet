@@ -62,7 +62,23 @@ if (Meteor.isClient) {
 
   });
   
+  $(document).ready(function(){
+    console.log($('.word'));
+    $('body').on('dragstop', '.word', function(event) {
+      $word = $(event.srcElement);
+      console.log($word.attr('id'));
+      position = $word.position();
+      Words.update({_id: $word.attr('id') }, {
+        $set: {
+          x: position.left,
+          y: position.top
+        }
+      });
+      console.log(position);
+    });
+  });
 }
+
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
