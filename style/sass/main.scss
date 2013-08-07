@@ -2,27 +2,36 @@
 
 /* CSS declarations go here */
 .word {
-  background-color: #fff;
-  border: 2px solid #000;
+  background-color: #ffffff;
+  @include background(
+    linear-gradient(#fff 20%, #fff9f9 80%, #fff 100%)
+  );
+  border: 2px solid;
+  border-color: #666 #333 #333 #666;
   cursor: pointer;
   display: inline-block;
   font-size: 40px;
   padding: 15px;
   position: absolute;
   white-space: nowrap;
+  border-radius: 3px;
 
-  @include transition-property(box-shadow, margin);
-  @include transition-duration(.15s, .15s);
+  @include transition-property(box-shadow, margin, transform);
+  @include transition-duration(.15s, .15s, .15s);
 
   @include box-shadow(
-    rgba(black, .4) 1px 1px 1px
+    rgba(black, .4) 1px 1px 1px,
+    white 0 0 4px 0 inset
   );
 
-  &.ui-draggable-dragging {
-    margin-top: -10px;
-    margin-left: -10px;
-    @include box-shadow(rgba(black, .2) 8px 8px 4px);
+  &.ui-draggable-dragging,
+  &:active {
+    // Make it look like it has moved forward
+    margin-top: -2px;
+    margin-left: -2px;
+    @include box-shadow(rgba(black, .2) 12px 12px 4px);
     z-index: 1;
+    @include rotate(-5deg);
   }
 }
 
@@ -46,6 +55,6 @@
 }
 
 body {
-  background-color: #eee;
+  background-color: #fef0e0;
 }
 
