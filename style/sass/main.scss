@@ -1,0 +1,51 @@
+@import "compass/css3";
+
+/* CSS declarations go here */
+.word {
+  background-color: #fff;
+  border: 2px solid #000;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 40px;
+  padding: 15px;
+  position: absolute;
+  white-space: nowrap;
+
+  @include transition-property(box-shadow, margin);
+  @include transition-duration(.15s, .15s);
+
+  @include box-shadow(
+    rgba(black, .4) 1px 1px 1px
+  );
+
+  &.ui-draggable-dragging {
+    margin-top: -10px;
+    margin-left: -10px;
+    @include box-shadow(rgba(black, .2) 8px 8px 4px);
+    z-index: 1;
+  }
+}
+
+.delete {
+  font-size: 20px;
+  color: #ee0000;
+  font-family: Helvetica;
+  position: absolute;
+  top: 0;
+  right: 5px;
+}
+
+#words {
+  height: 50px;
+  font-size: 40px;
+  width: 200px;
+}
+
+.ui-helper-hidden-accessible {
+  display: none;
+}
+
+body {
+  background-color: #eee;
+}
+

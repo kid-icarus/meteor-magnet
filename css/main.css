@@ -1,4 +1,5 @@
 /* CSS declarations go here */
+/* line 4, ../style/sass/main.scss */
 .word {
   background-color: #fff;
   border: 2px solid #000;
@@ -7,8 +8,30 @@
   font-size: 40px;
   padding: 15px;
   position: absolute;
+  white-space: nowrap;
+  -webkit-transition-property: box-shadow, margin;
+  -moz-transition-property: box-shadow, margin;
+  -o-transition-property: box-shadow, margin;
+  transition-property: box-shadow, margin;
+  -webkit-transition-duration: 0.15s, 0.15s;
+  -moz-transition-duration: 0.15s, 0.15s;
+  -o-transition-duration: 0.15s, 0.15s;
+  transition-duration: 0.15s, 0.15s;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
+  box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
+}
+/* line 21, ../style/sass/main.scss */
+.word.ui-draggable-dragging {
+  margin-top: -10px;
+  margin-left: -10px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 8px 8px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.2) 8px 8px 4px;
+  box-shadow: rgba(0, 0, 0, 0.2) 8px 8px 4px;
+  z-index: 1;
 }
 
+/* line 29, ../style/sass/main.scss */
 .delete {
   font-size: 20px;
   color: #ee0000;
@@ -18,17 +41,19 @@
   right: 5px;
 }
 
+/* line 38, ../style/sass/main.scss */
 #words {
   height: 50px;
   font-size: 40px;
   width: 200px;
 }
 
+/* line 44, ../style/sass/main.scss */
 .ui-helper-hidden-accessible {
   display: none;
 }
 
+/* line 48, ../style/sass/main.scss */
 body {
   background-color: #eee;
 }
-
