@@ -1,5 +1,6 @@
+@import "compass/css3";
+
 /* CSS declarations go here */
-/* line 4, ../style/sass/main.scss */
 .word {
   background-color: #fff;
   border: 2px solid #000;
@@ -10,7 +11,6 @@
   position: absolute;
 }
 
-/* line 14, ../style/sass/main.scss */
 .delete {
   font-size: 20px;
   color: #ee0000;
@@ -20,19 +20,17 @@
   right: 5px;
 }
 
-/* line 23, ../style/sass/main.scss */
 #words {
   height: 50px;
   font-size: 40px;
   width: 200px;
 }
 
-/* line 29, ../style/sass/main.scss */
 .ui-helper-hidden-accessible {
   display: none;
 }
 
-/* line 33, ../style/sass/main.scss */
 body {
   background-color: #eee;
 }
+
