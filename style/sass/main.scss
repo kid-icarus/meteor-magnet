@@ -35,13 +35,18 @@
   }
 }
 
-.delete {
+.word-delete {
+  display: none;
   font-size: 20px;
   color: #ee0000;
   font-family: Helvetica;
   position: absolute;
   top: 0;
   right: 5px;
+
+  .word:hover & {
+    display: block;
+  }
 }
 
 #words {

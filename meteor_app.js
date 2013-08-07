@@ -1,7 +1,7 @@
 Words = new Meteor.Collection("words");
 
 if (Meteor.isClient) {
-  
+
   Template.hello.greeting = function () {
     return "Words";
   };
@@ -11,7 +11,7 @@ if (Meteor.isClient) {
   };
 
   Template.hello.events({
-    'click .delete' : function () {
+    'click .word-delete' : function () {
       // template data, if any, is available in 'this'
       Words.remove(this._id);
     },
@@ -19,10 +19,10 @@ if (Meteor.isClient) {
       $('#' + this._id).draggable();
     },
     'click #up': function() {
-       
+
     }
   });
-  
+
   Meteor.startup(function() {
 
     $('#words').autocomplete({
@@ -50,7 +50,7 @@ if (Meteor.isClient) {
               query: request.term
             },
             success: function( data ) {
-  
+
               response( $.map( data.resultList, function( item ) {
                 return {
                   label: item.headline,
@@ -64,7 +64,7 @@ if (Meteor.isClient) {
     });
 
   });
-  
+
   $(document).ready(function(){
     console.log($('.word'));
     $('body').on('dragstop', '.word', function(event) {

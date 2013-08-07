@@ -44,7 +44,8 @@
 }
 
 /* line 38, ../style/sass/main.scss */
-.delete {
+.word-delete {
+  display: none;
   font-size: 20px;
   color: #ee0000;
   font-family: Helvetica;
@@ -52,20 +53,24 @@
   top: 0;
   right: 5px;
 }
-
 /* line 47, ../style/sass/main.scss */
+.word:hover .word-delete {
+  display: block;
+}
+
+/* line 52, ../style/sass/main.scss */
 #words {
   height: 50px;
   font-size: 40px;
   width: 200px;
 }
 
-/* line 53, ../style/sass/main.scss */
+/* line 58, ../style/sass/main.scss */
 .ui-helper-hidden-accessible {
   display: none;
 }
 
-/* line 57, ../style/sass/main.scss */
+/* line 62, ../style/sass/main.scss */
 body {
   background-color: #fef0e0;
 }
