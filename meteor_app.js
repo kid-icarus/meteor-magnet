@@ -33,10 +33,12 @@ if (Meteor.isClient) {
       delay: 500,
       select: function(event, ui) {
 
+
         var insertWord = {
           'name': ui.item.value,
           'x' : 0,
-          'y' : 0
+          'y' : 0,
+          'z' : 0,
         };
 
         Words.insert(insertWord);
@@ -70,18 +72,32 @@ if (Meteor.isClient) {
   });
 
   $(document).ready(function(){
-    console.log($('.word'));
+    $('body').on('click', '.word', function(event) {
+      $word = $(event.srcElement);
+      var max = Words.findOne({}, {sort: {z: -1}});
+      if (typeof max !== 'undefined') {
+        if (typeof max.z !== 'undefined') {
+          var z = max.z;
+        }
+      }
+      Words.update({_id: $word.attr('id') }, {
+        $set: {
+          z: (typeof z !== 'undefined') ? z + 1 : 0,
+        }
+      });
+    });
+
     $('body').on('dragstop', '.word', function(event) {
       $word = $(event.srcElement);
-      console.log($word.attr('id'));
       position = $word.position();
+
+
       Words.update({_id: $word.attr('id') }, {
         $set: {
           x: position.left,
-          y: position.top
+          y: position.top,
         }
       });
-      console.log(position);
     });
   });
 }
