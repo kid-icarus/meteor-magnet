@@ -23,7 +23,16 @@ if (Meteor.isClient) {
       $('#' + this._id).draggable();
     },
     'click #up': function() {
-
+      $('#canvas').animate({top:'+=20'}, 30);
+    },
+    'click #down': function() {
+      $('#canvas').animate({top:'-=20'}, 30);
+    },
+    'click #left': function() {
+      $('#canvas').animate({left:'+=20'}, 30);
+    },
+    'click #right': function() {
+      $('#canvas').animate({left:'-=20'}, 30);
     }
   });
 
@@ -72,6 +81,7 @@ if (Meteor.isClient) {
   });
 
   $(document).ready(function(){
+
     $('body').on('click', '.word', function(event) {
       $word = $(event.srcElement);
       var max = Words.findOne({}, {sort: {z: -1}});
@@ -99,8 +109,10 @@ if (Meteor.isClient) {
         }
       });
     });
-  });
-}
+
+  }); // .ready
+
+} // if
 
 
 if (Meteor.isServer) {

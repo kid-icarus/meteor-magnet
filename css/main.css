@@ -76,7 +76,49 @@
 /* line 61, ../style/sass/main.scss */
 body {
   background-color: #fef0e0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
+
+#canvas {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+#controls {
+  z-index: 99999999;
+  background: #fff;
+  padding: 1em;
+  position: relative;
+  text-align: center;
+  width: 300px;
+}
+
+  #up {
+    position: absolute;
+    top: 0;
+    left: 50%;
+  }
+
+  #down {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+  }
+  
+  #left {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+  }
+
+  #right {
+    position: absolute;
+    top: 50%;
+    right: 0;
+  }
 
 #users {
   position: fixed;
