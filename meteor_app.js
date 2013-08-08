@@ -23,11 +23,35 @@ if (Meteor.isClient) {
       $('#' + this._id).draggable();
     },
     'click #up': function() {
-
+      $('#canvas').animate({top:'+=20'}, 30);
+      updateURL();
+    },
+    'click #down': function() {
+      $('#canvas').animate({top:'-=20'}, 30);
+      updateURL();
+    },
+    'click #left': function() {
+      $('#canvas').animate({left:'+=20'}, 30);
+      updateURL();
+    },
+    'click #right': function() {
+      $('#canvas').animate({left:'-=20'}, 30);
+      updateURL();
     }
   });
 
   Meteor.startup(function() {
+
+    var urlParts = document.URL.split('/');
+    
+    if (urlParts.length == 4) {
+
+      var locationParts = urlParts[3].split(',');
+      
+      $('#canvas').css('top', locationParts[0]);  
+      $('#canvas').css('left', locationParts[1]);
+
+    } // if
 
     $('#words').autocomplete({
       delay: 500,
@@ -72,6 +96,7 @@ if (Meteor.isClient) {
   });
 
   $(document).ready(function(){
+
     $('body').on('click', '.word', function(event) {
       $word = $(event.srcElement);
       var max = Words.findOne({}, {sort: {z: -1}});
@@ -99,8 +124,10 @@ if (Meteor.isClient) {
         }
       });
     });
-  });
-}
+
+  }); // .ready
+
+} // if
 
 
 if (Meteor.isServer) {
@@ -137,4 +164,10 @@ if (Meteor.isServer) {
     }));
     // code to run on server at startup
   });
+}
+
+function updateURL() {
+  if ('history' in window && 'pushState' in window.history) {
+    window.history.pushState({},'', $('#canvas').css('top') + ',' + $('#canvas').css('left'));
+  }
 }
