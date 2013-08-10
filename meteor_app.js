@@ -1,14 +1,76 @@
 Words = new Meteor.Collection("words");
 Users = new Meteor.Collection("users");
 
+wordSource = '';
+wordSources = {
+  'linkedin': {
+    label: 'LinkedIn',
+    ajax: function(request, response) {
+      $.ajax({
+        url: 'http://www.linkedin.com/ta/skill',
+        dataType: 'jsonp',
+        data: {
+          query: request.term
+        },
+        success: function(data) {
+    
+          response( $.map(data.resultList, function(item) {
+            return {
+              label: item.headline,
+              value: item.displayName
+            }
+          }));
+    
+        }
+      });
+    }
+  },
+  'wikipedia':{
+    label: 'Wikipedia',
+    ajax: function(request, response) {
+      $.ajax({
+        url: 'http://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=ohi&namespace=0&callback=p',
+        dataType: 'jsonp',
+        data: {
+          action: 'opensearch',
+          format: 'json',
+          namespace: '0',
+          search: request.term,
+        },
+        success: function(data) {
+  
+          response( $.map(data[1], function(item) {
+            return {
+              label: item,
+              value: item
+            };
+          }));
+
+        }
+      });
+    }
+  }
+};
+
+Meteor.methods({
+ 
+ setSets: function() {
+ 
+   // Update all words without a set to have set of linkedin.
+ 
+   Words.update({set: null}, {$set: {set: 'linkedin'}}, {multi: true});
+
+ },
+
+});
+
+// Client-side code
+
 if (Meteor.isClient) {
 
-  Template.hello.greeting = function () {
-    return "Words";
-  };
-
   Template.hello.words = function () {
-    return Words.find();
+    setWordSource();
+    return Words.find({set: wordSource});
   };
   Template.hello.users = function () {
     return Users.find();
@@ -43,15 +105,20 @@ if (Meteor.isClient) {
   Meteor.startup(function() {
 
     var urlParts = document.URL.split('/');
-    
-    if (urlParts.length == 4) {
 
-      var locationParts = urlParts[3].split(',');
+    setWordSource();
+
+    if (urlParts.length >= 5) {
+
+      var locationParts = urlParts[4].split(',');
       
       $('#canvas').css('top', locationParts[0]);  
       $('#canvas').css('left', locationParts[1]);
 
-    } // if
+    }
+    else {
+      updateURL();
+    }
 
     $('#words').autocomplete({
       delay: 500,
@@ -61,6 +128,7 @@ if (Meteor.isClient) {
         var currentTop = parseInt($('#canvas').css('top'));
 
         var insertWord = {
+          'set': wordSource,
           'name': ui.item.value,
           'x' : (0 - currentLeft) + 100,
           'y' : (0 - currentTop) + 100,
@@ -74,25 +142,7 @@ if (Meteor.isClient) {
         return false;
 
       },
-      source: function(request, response) {
-          $.ajax({
-            url: 'http://www.linkedin.com/ta/skill',
-            dataType: 'jsonp',
-            data: {
-              query: request.term
-            },
-            success: function( data ) {
-
-              response( $.map( data.resultList, function( item ) {
-                return {
-                  label: item.headline,
-                  value: item.displayName
-                }
-              }));
-
-            }
-          });
-        },
+      source: wordSources[wordSource].ajax
     });
 
   });
@@ -127,49 +177,93 @@ if (Meteor.isClient) {
       });
     });
 
-  }); // .ready
+  });
 
-} // if
+}
 
+// Server-side code
 
 if (Meteor.isServer) {
+
   Meteor.startup(function () {
-  Users.remove({});
-    Meteor.default_server.stream_server.register( Meteor.bindEnvironment( function(socket) {
-        var intervalID = Meteor.setInterval(function() {
-            if (socket.meteor_session) {
+  
+    Users.remove({});
 
-                var connection = {
-                    connectionID: socket.meteor_session.id,
-                    connectionAddress: socket.address,
-                    userID: socket.meteor_session.userId,
-                    color: '#'+Math.floor(Math.random()*16777215).toString(16)
-                };
+    Meteor.default_server.stream_server.register( Meteor.bindEnvironment(function(socket) {
 
-                socket.id = socket.meteor_session.id;
+      // Update users for display.
 
-                Users.insert(connection); 
+      var intervalID = Meteor.setInterval(function() {
+  
+        if (socket.meteor_session) {
 
-                Meteor.clearInterval(intervalID);
-            }
-        }, 1000);
+          var connection = {
+            connectionID: socket.meteor_session.id,
+            connectionAddress: socket.address,
+            userID: socket.meteor_session.userId,
+            color: '#'+Math.floor(Math.random()*16777215).toString(16)
+          };
 
-        socket.on('close', Meteor.bindEnvironment(function () {
-            Users.remove({
-                connectionID: socket.id
-                });
-        }, function(e) {
-            Meteor._debug("Exception from connection close callback:", e);
-        }));
+          socket.id = socket.meteor_session.id;
+
+          Users.insert(connection); 
+
+          Meteor.clearInterval(intervalID);
+        }
+
+      }, 1000);
+
+      socket.on('close', Meteor.bindEnvironment(function() {
+        Users.remove({
+          connectionID: socket.id
+        });
+      }, function(e) {
+        Meteor._debug("Exception from connection close callback:", e);
+      }));
     }, function(e) {
         Meteor._debug("Exception from connection registration callback:", e);
     }));
-    // code to run on server at startup
+
   });
+
 }
 
+/**
+ * Updates path to match position.
+ */
 function updateURL() {
+  var path = $('#canvas').css('top') + ',' + $('#canvas').css('left');
+  setPushState(path);
+}
+
+/**
+ * Updates path.
+ */
+function setPushState(path) {
   if ('history' in window && 'pushState' in window.history) {
-    window.history.pushState({},'', $('#canvas').css('top') + ',' + $('#canvas').css('left'));
+    window.history.pushState({},'', path);
   }
+}
+
+/**
+ * Sets the wordSource based on the URL.
+ */
+function setWordSource() {
+ 
+  var urlParts = document.URL.split('/');
+
+  if (urlParts.length >= 4 && urlParts[3].length > 0) {
+    wordSource = urlParts[3];
+  }
+  else {
+
+    // Set random wordSource.
+    // TODO: provide interface to choose wordSource.
+
+    var keys = Object.keys(wordSources);
+    wordSource = keys[keys.length * Math.random() << 0];
+    setPushState(wordSource + '/');
+
+  }
+
 }
