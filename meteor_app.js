@@ -57,11 +57,13 @@ if (Meteor.isClient) {
       delay: 500,
       select: function(event, ui) {
 
+        var currentLeft = parseInt($('#canvas').css('left'));
+        var currentTop = parseInt($('#canvas').css('top'));
 
         var insertWord = {
           'name': ui.item.value,
-          'x' : 0,
-          'y' : 0,
+          'x' : (0 - currentLeft) + 100,
+          'y' : (0 - currentTop) + 100,
           'z' : 0,
         };
 
