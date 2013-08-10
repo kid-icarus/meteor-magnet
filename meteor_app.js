@@ -25,11 +25,11 @@ wordSources = {
       });
     }
   },
-  'wikipedia':{
+  'wikipedia': {
     label: 'Wikipedia',
     ajax: function(request, response) {
       $.ajax({
-        url: 'http://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=ohi&namespace=0&callback=p',
+        url: 'http://en.wikipedia.org/w/api.php',
         dataType: 'jsonp',
         data: {
           action: 'opensearch',
@@ -49,7 +49,31 @@ wordSources = {
         }
       });
     }
-  }
+  },
+  'amazon': {
+    label: 'Amazon',
+    ajax: function(request, response) {
+      $.ajax({
+        url: 'http://completion.amazon.com/search/complete',
+        dataType: 'jsonp',
+        data: {
+          mkt: '1',
+          'search-alias': 'aps',
+          q: request.term,
+        },
+        success: function(data) {
+  
+          response( $.map(data[1], function(item) {
+            return {
+              label: item,
+              value: item
+            };
+          }));
+
+        }
+      });
+    }
+  },
 };
 
 Meteor.methods({
