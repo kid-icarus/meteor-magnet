@@ -172,6 +172,32 @@ if (Meteor.isClient) {
   });
 
   $(document).ready(function(){
+    $('body').keydown(function(e) {
+      if( e.target !== this  ) {
+        return;
+      }
+      switch(e.keyCode) {
+        case 38:
+          $('#canvas').animate({top:'+=20'}, 30);
+          updateURL();
+          break;
+
+        case 40:
+          $('#canvas').animate({top:'-=20'}, 30);
+          updateURL();
+          break;
+
+        case 37:
+          $('#canvas').animate({left:'-=20'}, 30);
+          updateURL();
+          break;
+
+        case 39:
+          $('#canvas').animate({left:'+=20'}, 30);
+          updateURL();
+          break;
+      }
+    });
 
     $('body').on('click', '.word', function(event) {
       $word = $(event.srcElement);
