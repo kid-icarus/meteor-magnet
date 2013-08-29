@@ -18,7 +18,7 @@ wordSources = {
             return {
               label: item.headline,
               value: item.displayName
-            }
+            };
           }));
     
         }
@@ -35,7 +35,7 @@ wordSources = {
           action: 'opensearch',
           format: 'json',
           namespace: '0',
-          search: request.term,
+          search: request.term
         },
         success: function(data) {
   
@@ -59,7 +59,7 @@ wordSources = {
         data: {
           mkt: '1',
           'search-alias': 'aps',
-          q: request.term,
+          q: request.term
         },
         success: function(data) {
   
@@ -73,7 +73,7 @@ wordSources = {
         }
       });
     }
-  },
+  }
 };
 
 Meteor.methods({
@@ -84,7 +84,7 @@ Meteor.methods({
  
    Words.update({set: null}, {$set: {set: 'linkedin'}}, {multi: true});
 
- },
+ }
 
 });
 
