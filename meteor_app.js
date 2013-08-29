@@ -78,13 +78,13 @@ wordSources = {
 
 Meteor.methods({
  
- setSets: function() {
+  setSets: function() {
  
    // Update all words without a set to have set of linkedin.
  
-   Words.update({set: null}, {$set: {set: 'linkedin'}}, {multi: true});
+    Words.update({set: null}, {$set: {set: 'linkedin'}}, {multi: true});
 
- }
+  }
 
 });
 
